@@ -1,0 +1,3 @@
+output/**
+checkov_after.json
+checkov_before.json
