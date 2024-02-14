@@ -8,5 +8,3 @@ python-benedict = {extras = ["all"], version = "*"}
 
 [dev-packages]
 
-[requires]
-python_version = "3.9"
