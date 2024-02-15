@@ -18,10 +18,10 @@ spec:
         - name: nginx
           image: nginx:1.14.2
           livenessProbe:
-          exec:
-            command:
-            - cat
-            - /tmp/healthy
+            exec:
+              command:
+              - cat
+              - /tmp/healthy
           initialDelaySeconds: 5
           periodSeconds: 5
           securityContext:
