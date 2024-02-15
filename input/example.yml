@@ -4,7 +4,7 @@ metadata:
   name: nginx-deployment
   annotations:
     seccomp.security.alpha.kubernetes.io/pod: "docker/default" 
-	or
+    or
     seccomp.security.alpha.kubernetes.io/pod: "runtime/default"
   labels:
     app: nginx
