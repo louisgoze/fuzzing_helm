@@ -38,10 +38,10 @@ if __name__ == "__main__":
     input_data = read_yaml(args.file)
     ssh_fuzz = rules.fuzz_ssh_port(input_data)
     # 2 bis (optional) : if you need, you can also chain fuzzed input
-    cpu_limits = rules.fuzz_cpu_limit(ssh_fuzz)
-    ssh_mem_fuzz = rules.fuzz_memory_limit(cpu_limits)
-    fuzz_imagePullPolicy = rules.fuzz_imagePullPolicy(cpu_limits)
-    fuzz_group = rules.fuzz_group(cpu_limits)
+    fuzz_imagePullPolicy = rules.fuzz_imagePullPolicy(ssh_fuzz)
+    cpu_limits = rules.fuzz_cpu_limit(fuzz_imagePullPolicy)
+    ssh_mem_fuzz = rules.fuzz_memory_limit(fuzz_imagePullPolicy)
+    fuzz_group = rules.fuzz_group(fuzz_imagePullPolicy)
     save_yaml(ssh_mem_fuzz, args.output)
     # 3 - Run tools again on fuzzed yaml
     runners.run_checkov(os.path.dirname(args.output), "checkov_after.json")
