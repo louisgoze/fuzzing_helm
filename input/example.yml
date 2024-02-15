@@ -18,8 +18,8 @@ spec:
         - name: nginx
           image: nginx:1.14.2
           securityContext:
-          allowPrivilegeEscalation: false
-          runAsUser: 0
+            allowPrivilegeEscalation: false
+            runAsUser: 0
             capabilities:
               add: ["NET_ADMIN", "SYS_TIME"]
               drop: ["ALL"]
