@@ -51,6 +51,7 @@ spec:
             runAsUser: 20000
             capabilities:
               add: ["NET_ADMIN", "SYS_TIME"]
-              drop: ["ALL"]
+              drop: 
+                - ALL
           ports:
             - containerPort: 80
