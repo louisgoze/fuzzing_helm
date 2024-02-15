@@ -43,7 +43,7 @@ spec:
             periodSeconds: 10
           securityContext:
             allowPrivilegeEscalation: false
-            runAsUser: 0
+            runAsUser: 2000
             capabilities:
               add: ["NET_ADMIN", "SYS_TIME"]
               drop: ["ALL"]
