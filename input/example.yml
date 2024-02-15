@@ -18,7 +18,7 @@ spec:
         - name: nginx
           image: nginx:1.14.2
           securityContext:
-          runAsNonRoot: true
+          #runAsNonRoot: true
             capabilities:
               add: ["NET_ADMIN", "SYS_TIME"]
               drop: ["ALL"]
