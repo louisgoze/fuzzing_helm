@@ -22,3 +22,8 @@ def fuzz_imagePullPolicy(input_dict) -> dict:
     output_dict = copy.deepcopy(input_dict)
     output_dict["spec.template.spec.containers[0].imagePullPolicy"] = "Alwayss"
     return output_dict
+
+def fuzz_group(input_dict) -> dict:
+    output_dict = copy.deepcopy(input_dict)
+    output_dict["spec.template.spec.containers[0].securityContext.runAsGroup"] = "1"
+    return output_dict
