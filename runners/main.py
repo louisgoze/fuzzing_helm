@@ -19,10 +19,11 @@ def store_file(file: str, output: str) -> None:
     iac.write(output)
     iac.close()
 
+
 def run_checkov(directory: str, output_file: str):
     log.info("Running checkov")
     output, error = execute_command_with_error(
-        f"checkov -d {directory} --framework kubernetes --output json")
+        f"checkov --file {directory} --framework kubernetes --output json")
     if error is not None and len(error) > 1:
         log.error("Could not run checkov", error)
         os._exit(1)
