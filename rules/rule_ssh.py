@@ -32,3 +32,8 @@ def fuzz_sha(input_dict) -> dict:
     output_dict = copy.deepcopy(input_dict)
     output_dict["spec.template.spec.containers[0].image"] = "nginx:1.14.2@sha256:88"
     return output_dict
+
+def fuzz_sha(input_dict) -> dict:
+    output_dict = copy.deepcopy(input_dict)
+    output_dict["spec.template.spec.containers[0].securityContext.ReadOnlyRootFilesystem"] = "false"
+    return output_dict
