@@ -39,10 +39,11 @@ if __name__ == "__main__":
             print("Running fuzzer:", name)
             # 2 - Run your rules
             fuzzed_input = fn(input_data)
-            save_yaml(fuzzed_input, args.output)
+            output_name = "output/output_" + name + ".yml"
+            save_yaml(fuzzed_input, output_name)
             # 3 - Run tools again on fuzzed yaml
             runners.run_checkov(os.path.dirname(
-                args.output), "checkov_after.json")
+                output_name), "checkov_after.json")
             # 4 - Compare output
             before, after = comparators.compare_checkov(
                 "checkov_before.json", "checkov_after.json")
