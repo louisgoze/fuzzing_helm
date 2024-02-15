@@ -11,13 +11,13 @@ def to_stdout(final_dict):
     print(yaml.safe_dump(final_dict))
 
 
-def save_yaml(final_dict, filename):
-    with open(filename, 'w') as outfile:
+def save_yaml(final_dict, filerule_name):
+    with open(filerule_name, 'w') as outfile:
         outfile.write(final_dict.to_yaml())
 
 
-def read_yaml(filename) -> dict:
-    input_file = open(filename, "r")
+def read_yaml(filerule_name) -> dict:
+    input_file = open(filerule_name, "r")
     yaml_data = benedict(yaml.safe_load(input_file))
     return yaml_data
 
@@ -35,32 +35,34 @@ if __name__ == "__main__":
         args.file, f"checkov_before_base.json")
     print("Running fuzzer:", "base")
     # 2 - Run your rules
-    output_name = "output/output_base.yml"
-    save_yaml(input_data, output_name)
+    output_rule_name = "output/output_base.yml"
+    save_yaml(input_data, output_rule_name)
     # 3 - Run tools again on fuzzed yaml
     runners.run_checkov(
-        output_name, f"checkov_after_base.json")
+        output_rule_name, f"checkov_after_base.json")
     # 4 - Compare output
     before, after = comparators.compare_checkov(
         f"checkov_before_base.json", f"checkov_after_base.json")
     print("checkov", before, after)
 
-    for name, fn in rules.__dict__.items():
+    for rule_name, fn in rules.__dict__.items():
         if callable(fn):
+            output_rule_name = "output/output_" + rule_name + ".yml"
             # 1 - Run tools on the default yaml data
-            input_data = read_yaml(args.file)
-            runners.run_checkov(
-                args.file, f"checkov_before_{name}.json")
-            print("Running fuzzer:", name)
-            # 2 - Run your rules
-            fuzzed_input = fn(input_data)
-            assert fuzzed_input != input_data
-            output_name = "output/output_" + name + ".yml"
-            save_yaml(fuzzed_input, output_name)
-            # 3 - Run tools again on fuzzed yaml
-            runners.run_checkov(
-                output_name, f"checkov_after_{name}.json")
-            # 4 - Compare output
-            before, after = comparators.compare_checkov(
-                f"checkov_before_{name}.json", f"checkov_after_{name}.json")
-            print("checkov", before, after)
+            print("Running fuzzer:", rule_name)
+            for runner, runner_fn in runners.__dict__.items():
+                if callable(runner_fn):
+                    runner_fn(
+                        args.file, f"{runner.split('_')[1]}_before_{rule_name}.json")
+
+                    # 2 - Run your rules
+                    fuzzed_input = fn(input_data)
+                    assert fuzzed_input != input_data
+                    save_yaml(fuzzed_input, output_rule_name)
+                    # 3 - Run tools again on fuzzed yaml
+                    runner_fn(
+                        args.file, f"{runner.split('_')[1]}_after_{rule_name}.json")
+                    # 4 - Compare output
+                    before, after = comparators.compare_checkov(
+                        f"{runner.split('_')[1]}_before_{rule_name}.json", f"{runner.split('_')[1]}_after_{rule_name}.json")
+                    print(runner.split('_')[1], before, after)
