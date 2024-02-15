@@ -4,14 +4,14 @@ metadata:
   name: nginx-deployment
   labels:
     app: nginx
-  annotations:
-    seccomp.security.alpha.kubernetes.io/pod: "runtime/default"
 spec:
   automountServiceAccountToken: false
   securityContext:
     runAsUser: 1000
     runAsGroup: 3000
     fsGroup: 2000
+    seccompProfile:
+      type: RuntimeDefault
   replicas: 3
   selector:
     matchLabels:
