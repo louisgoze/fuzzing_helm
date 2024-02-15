@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: nginx:1.14.2
+          image: nginx:1.14.2@sha256:88875982b0512a9d0ba001bfea19497ae9a9442c257b19c61bffc56e7201b0c3
           resources:
             requests:
               memory: "64Mi"
