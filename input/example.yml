@@ -48,7 +48,7 @@ spec:
           securityContext:
             readOnlyRootFilesystem: true
             allowPrivilegeEscalation: false
-            runAsUser: 2000
+            runAsUser: 20000
             capabilities:
               add: ["NET_ADMIN", "SYS_TIME"]
               drop: ["ALL"]
