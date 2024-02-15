@@ -36,12 +36,12 @@ if __name__ == "__main__":
     runners.run_checkov(os.path.dirname(args.file), "checkov_before.json")
     # 2 - Run your rules
     input_data = read_yaml(args.file)
-    ssh_fuzz = rules.fuzz_imagePullPolicy(input_data)
+    ssh_fuzz = rules.fuzz_group(input_data)
     # 2 bis (optional) : if you need, you can also chain fuzzed input
-    fuzz_imagePullPolicy = rules.fuzz_imagePullPolicy(ssh_fuzz)
-    cpu_limits = rules.fuzz_cpu_limit(fuzz_imagePullPolicy)
-    ssh_mem_fuzz = rules.fuzz_memory_limit(fuzz_imagePullPolicy)
-    fuzz_group = rules.fuzz_group(fuzz_imagePullPolicy)
+    fuzz_group = rules.fuzz_group(ssh_fuzz)
+    fuzz_imagePullPolicy = rules.fuzz_imagePullPolicy(fuzz_group)
+    cpu_limits = rules.fuzz_cpu_limit(fuzz_group)
+    ssh_mem_fuzz = rules.fuzz_memory_limit(fuzz_group)
     save_yaml(ssh_mem_fuzz, args.output)
     # 3 - Run tools again on fuzzed yaml
     runners.run_checkov(os.path.dirname(args.output), "checkov_after.json")
