@@ -27,7 +27,7 @@ def fuzz_imagePullPolicy(input_dict) -> dict:
 
 def fuzz_group(input_dict) -> dict:
     output_dict = copy.deepcopy(input_dict)
-    output_dict["spec.template.spec.containers[0].securityContext.runAsGroup"] = "1"
+    output_dict["spec.template.spec.containers[0].securityContext.runAsGroup"] = 1
     return output_dict
 
 
@@ -39,5 +39,5 @@ def fuzz_sha(input_dict) -> dict:
 
 def fuzz_securityContext(input_dict) -> dict:
     output_dict = copy.deepcopy(input_dict)
-    output_dict["spec.template.spec.containers[0].securityContext.readOnlyRootFilesystem"] = "false"
+    output_dict["spec.template.spec.containers[0].securityContext.readOnlyRootFilesystem"] = False
     return output_dict
