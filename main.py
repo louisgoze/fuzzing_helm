@@ -30,24 +30,26 @@ if __name__ == "__main__":
 
     input_data = read_yaml(args.file)
 
-    for rule_name, fn in rules.__dict__.items():
+    for rule_name, fn in rules.__dict__.items():  # For each fuzz rule
         if callable(fn):
             output_rule_name = "output/output_" + rule_name + ".yml"
-            # 1 - Run tools on the default yaml data
             print("Running fuzzer:", rule_name)
-            for runner, runner_fn in runners.__dict__.items():
+            for runner, runner_fn in runners.__dict__.items():  # For each security checker
                 if callable(runner_fn):
+                    # 1 - Run the security checker on input
                     runner_fn(
                         args.file, f"scan_results/{runner.split('_')[1]}_before_{rule_name}.json")
 
-                    # 2 - Run your rules
+                    # 2 - Apply fuzz rule
                     fuzzed_input = fn(input_data)
                     assert fuzzed_input != input_data
+                    # 3 - Store fuzz rule
                     save_yaml(fuzzed_input, output_rule_name)
-                    # 3 - Run tools again on fuzzed yaml
+                    # 4 - Run the security checker on fuzzed input
                     runner_fn(
                         args.file, f"scan_results/{runner.split('_')[1]}_after_{rule_name}.json")
-                    # 4 - Compare output
+                    # 5 - Compare output
                     before, after = comparators.compare_checkov(
                         f"scan_results/{runner.split('_')[1]}_before_{rule_name}.json", f"scan_results/{runner.split('_')[1]}_after_{rule_name}.json")
+
                     print(runner.split('_')[1], before, after)
