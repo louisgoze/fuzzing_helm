@@ -4,7 +4,6 @@ import runners
 import comparators
 from benedict import benedict
 import argparse
-import os
 
 
 def to_stdout(final_dict):
