@@ -1,1 +1,1 @@
-from .rule_ssh import *
+from .main import *
