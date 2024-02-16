@@ -29,19 +29,6 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     input_data = read_yaml(args.file)
-    runners.run_checkov(
-        args.file, f"scan_results/checkov_before_base.json")
-    print("Running fuzzer:", "base")
-    # 2 - Run your rules
-    output_rule_name = "output/output_base.yml"
-    save_yaml(input_data, output_rule_name)
-    # 3 - Run tools again on fuzzed yaml
-    runners.run_checkov(
-        output_rule_name, f"scan_results/checkov_after_base.json")
-    # 4 - Compare output
-    before, after = comparators.compare_checkov(
-        f"scan_results/checkov_before_base.json", f"scan_results/checkov_after_base.json")
-    print("checkov", before, after)
 
     for rule_name, fn in rules.__dict__.items():
         if callable(fn):
