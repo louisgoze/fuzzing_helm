@@ -31,19 +31,19 @@ def run_checkov(directory: str, output_file: str):
 def run_kubesec(directory: str, output_file: str):
     log.info("Running kubesec")
     output, error = _execute_command_with_error(
-        f"kubesec scan {directory} --output json > {output_file}")
+        f"kubesec scan {directory} --output json")
     _store_file(output_file, output)
 
 
 def run_kubeaudit(directory: str, output_file: str):
     log.info("Running kubeaudit")
     output, error = _execute_command_with_error(
-        f"kubeaudit all -f {directory} --format=json > {output_file}")
+        f"kubeaudit all -f {directory} --format=json")
     _store_file(output_file, output)
 
 
 def run_kubescore(directory: str, output_file: str):
     log.info("Running kubescore")
     output, error = _execute_command_with_error(
-        f"kube-score score {directory} > {output_file}")
+        f"kube-score score {directory}")
     _store_file(output_file, output)
