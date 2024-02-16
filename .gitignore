@@ -1,3 +1,4 @@
 output/**
+scan_results/**
 checkov_after.json
 checkov_before.json
