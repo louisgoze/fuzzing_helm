@@ -39,5 +39,5 @@ def fuzz_sha(input_dict) -> dict:
 
 def fuzz_securityContext(input_dict) -> dict:
     output_dict = copy.deepcopy(input_dict)
-    output_dict["spec.template.spec.containers[0].securityContext.ReadOnlyRootFilesystem"] = "false"
+    output_dict["spec.template.spec.containers[0].securityContext.readOnlyRootFilesystem"] = "false"
     return output_dict
