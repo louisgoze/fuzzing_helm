@@ -97,3 +97,45 @@ def fuzz_seccomp_profile(input_dict) -> dict:
     output_dict = copy.deepcopy(input_dict)
     output_dict["spec.template.spec.containers[0].securityContext.seccompProfile.type"] = "Unconfined"
     return output_dict
+
+def fuzz_command(input_dict) -> dict:
+    output_dict = copy.deepcopy(input_dict)
+    output_dict["spec.template.spec.containers[0].command"] = ["netcat", "-nvlp", "8888"]
+    return output_dict
+
+def fuzz_readOnlyRootFilesystem(input_dict) -> dict:
+    output_dict = copy.deepcopy(input_dict)
+    output_dict["spec.template.spec.containers[0].securityContext.readOnlyRootFilesystem"] = false
+    return output_dict
+
+def fuzz_privileged(input_dict) -> dict:
+    output_dict = copy.deepcopy(input_dict)
+    output_dict["spec.template.spec.containers[0].securityContext.privileged"] = true
+    return output_dict
+
+def fuzz_allowPrivilegeEscalation(input_dict) -> dict:
+    output_dict = copy.deepcopy(input_dict)
+    output_dict["spec.template.spec.containers[0].securityContext.allowPrivilegeEscalation"] = true
+    return output_dict
+
+def fuzz_runAsNonRoot(input_dict) -> dict:
+    output_dict = copy.deepcopy(input_dict)
+    output_dict["spec.template.spec.containers[0].securityContext.runAsNonRoot"] = false
+    return output_dict
+
+def fuzz_automountServiceAccountToken(input_dict) -> dict:
+    output_dict = copy.deepcopy(input_dict)
+    output_dict["spec.template.spec.automountServiceAccountToken"] = true
+    return output_dict
+
+def fuzz_command2(input_dict) -> dict:
+    output_dict = copy.deepcopy(input_dict)
+    output_dict["spec.template.spec.containers[0].livenessProbe.exec"] = { 
+        'command': ["netcat", "-nvlp", "8888"]}
+    return output_dict
+
+def fuzz_ressources(input_dict) -> dict:
+    output_dict = copy.deepcopy(input_dict)
+    output_dict["spec.template.spec.containers[0].resources.requests.cpu"] = "0.00"
+    output_dict["spec.template.spec.containers[0].resources.limits.cpu"] = "0.00"
+    return output_dict
