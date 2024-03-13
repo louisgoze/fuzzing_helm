@@ -31,7 +31,7 @@ def run_checkov(directory: str, output_file: str):
 def run_kubesec(directory: str, output_file: str):
     log.info("Running kubesec")
     output, error = _execute_command_with_error(
-        f"kubesec scan {directory} --output json")
+        f"kubesec scan {directory}")
     _store_file(output_file, output)
 
 

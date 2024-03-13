@@ -11,14 +11,26 @@ def fuzz_memory_limit(input_dict) -> dict:
     output_dict["spec.template.spec.containers[0].resources.limits.memory"] = "0m"
     return output_dict
 
+
+def fuzz_memory_request(input_dict) -> dict:
+    output_dict = copy.deepcopy(input_dict)
+    output_dict["spec.template.spec.containers[0].resources.requests.memory"] = "0Mi"
+    return output_dict
+
 def fuzz_cpu_limit(input_dict) -> dict:
     output_dict = copy.deepcopy(input_dict)
-    output_dict["spec.template.spec.containers[0].resources.limits.cpu."] = "0,5m"
+    output_dict["spec.template.spec.containers[0].resources.limits.cpu"] = "0.005"
+    return output_dict
+
+
+def fuzz_cpu_request(input_dict) -> dict:
+    output_dict = copy.deepcopy(input_dict)
+    output_dict["spec.template.spec.containers[0].resources.requests.cpu"] = "0.00"
     return output_dict
 
 def fuzz_imagePullPolicy(input_dict) -> dict:
     output_dict = copy.deepcopy(input_dict)
-    output_dict["spec.template.spec.containers[0].imagePullPolicy"] = "Alwayss"
+    output_dict["spec.template.spec.containers[0].imagePullPolicy"] = "~Always"
     return output_dict
 
 def fuzz_group(input_dict) -> dict:
@@ -36,7 +48,7 @@ def fuzz_sha(input_dict) -> dict:
     output_dict["spec.template.spec.containers[0].image"] = "nginx:1.36.2@sha256:88"
     return output_dict
 
-def fuzz_securityContext(input_dict) -> dict:
+def fuzz_securityContext_1(input_dict) -> dict:
     output_dict = copy.deepcopy(input_dict)
     output_dict["spec.template.spec.containers[0].securityContext.readOnlyRootFilesystem"] = False
     return output_dict
@@ -59,4 +71,29 @@ def fuzz_PrivilegeEscalation(input_dict) -> dict:
 def fuzz_RootFilesystem(input_dict) -> dict:
     output_dict = copy.deepcopy(input_dict)
     output_dict["spec.template.spec.containers[0].securityContext.readOnlyRootFilesystem"] = False
+    return output_dict
+
+
+def fuzz_securityContext_2(input_dict) -> dict:
+    output_dict = copy.deepcopy(input_dict)
+    output_dict["spec.template.spec.containers[0].securityContext.allowPrivilegeEscalation"] = True
+    return output_dict
+
+
+def fuzz_securityContext_3(input_dict) -> dict:
+    output_dict = copy.deepcopy(input_dict)
+    output_dict["spec.template.spec.containers[0].securityContext.capabilities"] = {}
+    return output_dict
+
+
+def fuzz_securityContext_4(input_dict) -> dict:
+    output_dict = copy.deepcopy(input_dict)
+    output_dict["spec.template.spec.containers[0].securityContext.capabilities"] = {
+        'add': ["NET_ADMIN", "SYS_TIME"], 'drop': ["ALL"]}
+    return output_dict
+
+
+def fuzz_seccomp_profile(input_dict) -> dict:
+    output_dict = copy.deepcopy(input_dict)
+    output_dict["spec.template.spec.containers[0].securityContext.seccompProfile.type"] = "Unconfined"
     return output_dict
