@@ -105,27 +105,27 @@ def fuzz_command(input_dict) -> dict:
 
 def fuzz_readOnlyRootFilesystem(input_dict) -> dict:
     output_dict = copy.deepcopy(input_dict)
-    output_dict["spec.template.spec.containers[0].securityContext.readOnlyRootFilesystem"] = false
+    output_dict["spec.template.spec.containers[0].securityContext.readOnlyRootFilesystem"] = False
     return output_dict
 
 def fuzz_privileged(input_dict) -> dict:
     output_dict = copy.deepcopy(input_dict)
-    output_dict["spec.template.spec.containers[0].securityContext.privileged"] = true
+    output_dict["spec.template.spec.containers[0].securityContext.privileged"] = True
     return output_dict
 
 def fuzz_allowPrivilegeEscalation(input_dict) -> dict:
     output_dict = copy.deepcopy(input_dict)
-    output_dict["spec.template.spec.containers[0].securityContext.allowPrivilegeEscalation"] = true
+    output_dict["spec.template.spec.containers[0].securityContext.allowPrivilegeEscalation"] = True
     return output_dict
 
 def fuzz_runAsNonRoot(input_dict) -> dict:
     output_dict = copy.deepcopy(input_dict)
-    output_dict["spec.template.spec.containers[0].securityContext.runAsNonRoot"] = false
+    output_dict["spec.template.spec.containers[0].securityContext.runAsNonRoot"] = False
     return output_dict
 
 def fuzz_automountServiceAccountToken(input_dict) -> dict:
     output_dict = copy.deepcopy(input_dict)
-    output_dict["spec.template.spec.automountServiceAccountToken"] = true
+    output_dict["spec.template.spec.automountServiceAccountToken"] = True
     return output_dict
 
 def fuzz_command2(input_dict) -> dict:
