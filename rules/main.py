@@ -48,11 +48,6 @@ def fuzz_sha(input_dict) -> dict:
     output_dict["spec.template.spec.containers[0].image"] = "nginx:1.36.2@sha256:88"
     return output_dict
 
-def fuzz_securityContext_1(input_dict) -> dict:
-    output_dict = copy.deepcopy(input_dict)
-    output_dict["spec.template.spec.containers[0].securityContext.readOnlyRootFilesystem"] = False
-    return output_dict
-
 def fuzz_drop(input_dict) -> dict:
     output_dict = copy.deepcopy(input_dict)
     output_dict["spec.template.spec.containers[0].securityContext.capabilities.drop[0]"] = "NONE"
@@ -72,13 +67,6 @@ def fuzz_RootFilesystem(input_dict) -> dict:
     output_dict = copy.deepcopy(input_dict)
     output_dict["spec.template.spec.containers[0].securityContext.readOnlyRootFilesystem"] = False
     return output_dict
-
-
-def fuzz_securityContext_2(input_dict) -> dict:
-    output_dict = copy.deepcopy(input_dict)
-    output_dict["spec.template.spec.containers[0].securityContext.allowPrivilegeEscalation"] = True
-    return output_dict
-
 
 def fuzz_securityContext_3(input_dict) -> dict:
     output_dict = copy.deepcopy(input_dict)
