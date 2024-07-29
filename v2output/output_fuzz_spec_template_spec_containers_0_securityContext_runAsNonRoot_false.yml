@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nginx
+  name: nginx-deployment
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      automountServiceAccountToken: false
+      containers:
+      - command:
+        - sleep
+        - '400'
+        image: busybox:1.35.0@sha256:462231a4068d238616e330a49aa4c0896a61c4003adde5cbe6879caa7f1992de
+        imagePullPolicy: Always
+        livenessProbe:
+          exec:
+            command:
+            - cat
+            - /tmp/healthy
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        name: nginx
+        ports:
+        - containerPort: 80
+        readinessProbe:
+          initialDelaySeconds: 15
+          periodSeconds: 10
+          tcpSocket:
+            port: 8080
+        resources:
+          limits:
+            cpu: 500m
+            ephemeral-storage: 2Gi
+            memory: 128Mi
+          requests:
+            cpu: 250m
+            ephemeral-storage: 2Gi
+            memory: 64Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          privileged: false
+          readOnlyRootFilesystem: true
+          runAsGroup: 10001
+          runAsNonRoot: 'false'
+          runAsUser: 10001
+          seccompProfile:
+            type: RuntimeDefault
+      securityContext:
+        fsGroup: 10001
+        runAsGroup: 10001
+        runAsUser: 10001
+        seccompProfile:
+          type: RuntimeDefault

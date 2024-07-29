@@ -1,0 +1,10 @@
+[
+  {
+    "object": "Deployment/nginx-deployment.default",
+    "valid": false,
+    "fileName": "v2output/output_fuzz_apiVersion_v1.yml",
+    "message": "could not find schema for Deployment",
+    "score": 0,
+    "scoring": {}
+  }
+]

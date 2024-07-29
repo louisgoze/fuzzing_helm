@@ -1,0 +1,19 @@
+{
+    "fuzzed_file": "v2output/output_fuzz_spec_template_spec_containers_0_readinessProbe_initialDelaySeconds_15.yml",
+    "checkov": {
+        "base_failed": 2,
+        "fuzzed_failed": 2
+    },
+    "kubesec": {
+        "base_failed": 3,
+        "fuzzed_failed": "Error"
+    },
+    "kubeaudit": {
+        "base_failed": 16,
+        "fuzzed_failed": 2
+    },
+    "kubescore": {
+        "base_failed": 2,
+        "fuzzed_failed": 1
+    }
+}

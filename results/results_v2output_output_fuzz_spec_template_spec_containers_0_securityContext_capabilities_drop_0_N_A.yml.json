@@ -1,0 +1,19 @@
+{
+    "fuzzed_file": "v2output/output_fuzz_spec_template_spec_containers_0_securityContext_capabilities_drop_0_N_A.yml",
+    "checkov": {
+        "base_failed": 2,
+        "fuzzed_failed": 4
+    },
+    "kubesec": {
+        "base_failed": 3,
+        "fuzzed_failed": 4
+    },
+    "kubeaudit": {
+        "base_failed": 16,
+        "fuzzed_failed": 21
+    },
+    "kubescore": {
+        "base_failed": 2,
+        "fuzzed_failed": 2
+    }
+}
