@@ -1,0 +1,41 @@
+Variable,Type,Value,Required,Default,Possible Values
+apiVersion,str,apps/v1,No,apps/v1,"v1, apps/v1, batch/v1"
+kind,str,Deployment,No,Deployment,"Deployment, Service, Pod"
+metadata.name,str,nginx-deployment,No,nginx-deployment,"nginx-deployment, my-service, my-pod"
+metadata.namespace,str,default,No,default,"default, kube-system, production"
+metadata.labels.app,str,nginx,No,nginx,"nginx, webapp, database"
+spec.replicas,int,1,No,1,"1, 2, 3"
+spec.selector.matchLabels.app,str,nginx,No,nginx,N/A
+spec.template.metadata.labels.app,str,nginx,No,nginx,N/A
+spec.template.spec.automountServiceAccountToken,bool,False,No,False,N/A
+spec.template.spec.securityContext.runAsUser,int,10001,No,10001,N/A
+spec.template.spec.securityContext.runAsGroup,int,10001,No,10001,N/A
+spec.template.spec.securityContext.fsGroup,int,10001,No,10001,N/A
+spec.template.spec.securityContext.seccompProfile.type,str,RuntimeDefault,No,RuntimeDefault,N/A
+spec.template.spec.containers[0].name,str,nginx,No,nginx,"nginx, busybox, alpine"
+spec.template.spec.containers[0].image,str,busybox:1.35.0@sha256:462231a4068d238616e330a49aa4c0896a61c4003adde5cbe6879caa7f1992de,No,busybox:1.35.0@sha256:462231a4068d238616e330a49aa4c0896a61c4003adde5cbe6879caa7f1992de,"nginx:latest, busybox:1.35.0, alpine:3.14"
+spec.template.spec.containers[0].command[0],str,sleep,No,sleep,N/A
+spec.template.spec.containers[0].command[1],str,400,No,400,N/A
+spec.template.spec.containers[0].resources.requests.memory,str,64Mi,No,64Mi,N/A
+spec.template.spec.containers[0].resources.requests.ephemeral-storage,str,2Gi,No,2Gi,N/A
+spec.template.spec.containers[0].resources.requests.cpu,str,250m,No,250m,N/A
+spec.template.spec.containers[0].resources.limits.memory,str,128Mi,No,128Mi,N/A
+spec.template.spec.containers[0].resources.limits.ephemeral-storage,str,2Gi,No,2Gi,N/A
+spec.template.spec.containers[0].resources.limits.cpu,str,500m,No,500m,N/A
+spec.template.spec.containers[0].imagePullPolicy,str,Always,No,Always,"Always, IfNotPresent, Never"
+spec.template.spec.containers[0].livenessProbe.exec.command[0],str,cat,No,cat,N/A
+spec.template.spec.containers[0].livenessProbe.exec.command[1],str,/tmp/healthy,No,/tmp/healthy,N/A
+spec.template.spec.containers[0].livenessProbe.initialDelaySeconds,int,5,No,5,N/A
+spec.template.spec.containers[0].livenessProbe.periodSeconds,int,5,No,5,N/A
+spec.template.spec.containers[0].readinessProbe.tcpSocket.port,int,8080,No,8080,N/A
+spec.template.spec.containers[0].readinessProbe.initialDelaySeconds,int,15,No,15,N/A
+spec.template.spec.containers[0].readinessProbe.periodSeconds,int,10,No,10,N/A
+spec.template.spec.containers[0].securityContext.privileged,bool,False,No,False,N/A
+spec.template.spec.containers[0].securityContext.readOnlyRootFilesystem,bool,True,No,True,N/A
+spec.template.spec.containers[0].securityContext.allowPrivilegeEscalation,bool,False,No,False,N/A
+spec.template.spec.containers[0].securityContext.runAsNonRoot,bool,True,No,True,N/A
+spec.template.spec.containers[0].securityContext.runAsUser,int,10001,No,10001,N/A
+spec.template.spec.containers[0].securityContext.runAsGroup,int,10001,No,10001,N/A
+spec.template.spec.containers[0].securityContext.seccompProfile.type,str,RuntimeDefault,No,RuntimeDefault,N/A
+spec.template.spec.containers[0].securityContext.capabilities.drop[0],str,ALL,No,ALL,N/A
+spec.template.spec.containers[0].ports[0].containerPort,int,80,No,80,N/A
